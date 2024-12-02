@@ -1,0 +1,82 @@
+services:
+  website:
+    container_name: website
+    build:
+      context: ./website
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    volumes:
+      - ./website/app:/var/www/html:z
+    ports:
+      - "8000:80" # Gebruik geen 8000 OF 8001 meer !!!!!
+    networks:
+      - appnetwork
+    depends_on:
+      - dbwebsite
+
+  dbwebsite:
+    image: mariadb:latest
+    container_name: dbwebsite
+    restart: unless-stopped
+    environment:
+      - MARIADB_DATABASE=websitedatabase
+      - MARIADB_USER=user
+      - MARIADB_PASSWORD=password
+      - MARIADB_ROOT_PASSWORD=root
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./website/db_data:/var/lib/mysql:z
+    networks:
+      - appnetwork
+
+    
+  # soapapi:
+  #   build: 
+  #     context: ./services/UserProfileSoap/userProfile
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "8002:5164"
+  #   # environment:
+  #   #   SOAP_ENDPOINT: "http://localhost:5164/Service.asmx"
+
+  # User Profile Service
+  user_soap_api:
+    container_name: user_soap_api
+    build:
+      context: services/UserProfileSoap/userProfile
+      dockerfile: ./Dockerfile
+    restart: unless-stopped
+    ports:
+      - "8002:5109"
+    networks:
+      - appnetwork
+
+  # db_user_profile:
+  #   container_name: db_user_profile
+  #   image: postgres:14
+  #   environment:
+  #     - POSTGRES_USER=postgres
+  #     - POSTGRES_PASSWORD=postgres
+  #     - POSTGRES_DB=user_profile_database
+  #   ports:
+  #     - "5433:5432"
+  #   volumes:
+  #     - ./services/userProfileAPI/db_data:/var/lib/postgresql/data:Z
+  #   networks:
+  #     - hospital_network
+
+
+  adminer:
+    image: adminer:4.8.1-standalone
+    restart: unless-stopped
+    ports:
+      - 8080:8080
+    networks:
+      - appnetwork
+      
+# Networks
+networks:
+  appnetwork:
+    driver: bridge
+

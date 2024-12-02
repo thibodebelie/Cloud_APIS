@@ -1,0 +1,10 @@
+{
+    "name": "Laravel Development",
+    "dockerComposeFile": ["../../docker-compose.yml"],
+    "service": "website",
+    "workspaceFolder": "/var/www/html",
+    "shutdownAction": "stopCompose",
+
+    //hierin alle extentions toevoegen
+    "customizations": {"jetbrains":{"plugins":[".env file support", "Atom Material Icons", "Laravel Idea", "Material Theme UI"]}}
+}
