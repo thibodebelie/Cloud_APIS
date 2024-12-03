@@ -1,0 +1,74 @@
+{
+    "menu": {
+      "appetizers": [
+        {
+          "name": "Bruschetta",
+          "description": "Grilled bread topped with fresh tomatoes, garlic, and basil.",
+          "price": 8.50
+        },
+        {
+          "name": "Stuffed Mushrooms",
+          "description": "Mushrooms filled with garlic, cheese, and herbs.",
+          "price": 9.00
+        }
+      ],
+      "soups": [
+        {
+          "name": "Tomato Basil Soup",
+          "description": "A creamy blend of tomatoes and fresh basil.",
+          "price": 7.00
+        },
+        {
+          "name": "Chicken Noodle Soup",
+          "description": "A classic comfort soup with tender chicken and vegetables.",
+          "price": 6.50
+        }
+      ],
+      "main courses": [
+        {
+          "name": "Grilled Salmon",
+          "description": "Served with roasted vegetables and a lemon butter sauce.",
+          "price": 18.95
+        },
+        {
+          "name": "Filet Mignon",
+          "description": "8oz steak served with mashed potatoes and seasonal greens.",
+          "price": 25.50
+        },
+        {
+          "name": "Pasta Primavera",
+          "description": "Fresh vegetables tossed with penne pasta in a light garlic sauce.",
+          "price": 15.00
+        }
+      ],
+      "desserts": [
+        {
+          "name": "Cheesecake",
+          "description": "Classic New York-style cheesecake with a graham cracker crust.",
+          "price": 6.00
+        },
+        {
+          "name": "Chocolate Lava Cake",
+          "description": "Warm chocolate cake with a molten center, served with vanilla ice cream.",
+          "price": 7.50
+        }
+      ],
+      "beverages": [
+        {
+          "name": "Coffee",
+          "description": "Freshly brewed coffee.",
+          "price": 2.50
+        },
+        {
+          "name": "Fresh Lemonade",
+          "description": "Made with real lemons and a touch of sweetness.",
+          "price": 3.50
+        },
+        {
+          "name": "Red Wine",
+          "description": "House red wine, perfect with any meal.",
+          "price": 8.00
+        }
+      ]
+    }
+  }

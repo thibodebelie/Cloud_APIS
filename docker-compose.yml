@@ -52,6 +52,16 @@ services:
     networks:
       - appnetwork
 
+  restapi:
+    container_name: restapi
+    build:
+      context: services/jsonRestApi
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    networks:
+      - appnetwork
+
   # db_user_profile:
   #   container_name: db_user_profile
   #   image: postgres:14
