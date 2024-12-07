@@ -24,10 +24,8 @@ Route::get('/menu', [ApiController::class, 'getMenu']);
 // Route::post('/add-profile', [ProfileController::class, 'store'])->name('add-profile.store');
 Route::get('/profiles', [ProfileController::class, 'getAllProfiles'])->name('profiles.index');
 
-
-// Route::get('/profiles', [ProfileController::class, 'getAllProfiles'])->name('profiles.index');
-// Route::get('/profiles/create', [ProfileController::class, 'create'])->name('profiles.create');
-// Route::post('/profiles', [ProfileController::class, 'store'])->name('profiles.store');
+Route::get('/profiles/create', [ProfileController::class, 'create'])->name('profiles.create');
+Route::post('/profiles', [ProfileController::class, 'store'])->name('profiles.store');
 
 
 

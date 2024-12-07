@@ -31,4 +31,20 @@ class ProfileService
         // Convert to array if needed
         return is_array($profiles) ? $profiles : [$profiles];
     }
+    
+    public function createProfile(array $profileData)
+    {
+        $params = [
+            'profile' => [
+                'Address' => $profileData['Address'],
+                'Birthdate' => $profileData['Birthdate'],
+                'Email' => $profileData['Email'],
+                'Id' => $profileData['Id'], // Ensure ID is unique if required
+                'Name' => $profileData['Name'],
+                'Phone' => $profileData['Phone'],
+            ],
+        ];
+
+        return $this->soapWrapper->call('profile_service.CreateProfile', [$params]);
+    }
 }
