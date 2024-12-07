@@ -49,5 +49,3 @@ RUN chown -R www-data:www-data /var/www/html/vendor \
     && chmod -R 775 /var/www/html/vendor
 
 CMD ["php", "artisan", "serve", "--host=0.0.0.0"]
-#Dit is op pooit 8001 dan, niet op poort 8000
-#TODO: For some reason this not work, do in your devcontainer please, fix maybe later

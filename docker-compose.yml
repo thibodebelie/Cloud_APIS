@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   website:
     container_name: website
@@ -8,11 +10,12 @@ services:
     volumes:
       - ./website/app:/var/www/html:z
     ports:
-      - "8000:80" # Gebruik geen 8000 OF 8001 meer !!!!!
+      - "8000:80"
     networks:
       - appnetwork
     depends_on:
       - dbwebsite
+      - user_soap_api
 
   dbwebsite:
     image: mariadb:latest
@@ -30,25 +33,30 @@ services:
     networks:
       - appnetwork
 
-    
-  # soapapi:
-  #   build: 
-  #     context: ./services/UserProfileSoap/userProfile
-  #     dockerfile: Dockerfile
-  #   ports:
-  #     - "8002:5164"
-  #   # environment:
-  #   #   SOAP_ENDPOINT: "http://localhost:5164/Service.asmx"
-
-  # User Profile Service
   user_soap_api:
     container_name: user_soap_api
     build:
-      context: services/UserProfileSoap/userProfile
+      context: services/ProfileAPISOAP/UserProfileSoap
       dockerfile: ./Dockerfile
     restart: unless-stopped
     ports:
       - "8002:5109"
+    networks:
+      - appnetwork
+    depends_on:
+      - db_user_profile
+
+  db_user_profile:
+    image: postgres:14
+    container_name: db_user_profile
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=user_profile_database
+    ports:
+      - "5433:5432"
+    volumes:
+      - ./services/userProfileAPI/db_data:/var/lib/postgresql/data:Z
     networks:
       - appnetwork
 
@@ -62,21 +70,6 @@ services:
     networks:
       - appnetwork
 
-  # db_user_profile:
-  #   container_name: db_user_profile
-  #   image: postgres:14
-  #   environment:
-  #     - POSTGRES_USER=postgres
-  #     - POSTGRES_PASSWORD=postgres
-  #     - POSTGRES_DB=user_profile_database
-  #   ports:
-  #     - "5433:5432"
-  #   volumes:
-  #     - ./services/userProfileAPI/db_data:/var/lib/postgresql/data:Z
-  #   networks:
-  #     - hospital_network
-
-
   adminer:
     image: adminer:4.8.1-standalone
     restart: unless-stopped
@@ -84,9 +77,7 @@ services:
       - 8080:8080
     networks:
       - appnetwork
-      
-# Networks
+
 networks:
   appnetwork:
     driver: bridge
-

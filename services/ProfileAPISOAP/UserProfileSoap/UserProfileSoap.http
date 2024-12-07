@@ -1,0 +1,6 @@
+@UserProfileSoap_HostAddress = http://localhost:5066
+
+GET {{UserProfileSoap_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
